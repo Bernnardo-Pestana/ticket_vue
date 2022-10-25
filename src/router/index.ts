@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Base from "../views/Base.vue";
 import Labels from "./labels";
 
 const routes: Array<any> = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "Base",
+    component: Base,
     children: Labels,
   },
   { path: "/:catchAll(.*)", redirect: "/" },

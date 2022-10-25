@@ -8,20 +8,8 @@
       <label for="nome">Nome </label>
       <input type="text" id="nome" v-model="data.nome">
 
-      <label for="nome">CPF </label>
-      <input type="text" id="cpf" v-model="data.cpf">
-
-      <label for="nome">Telefone </label>
-      <input type="text" id="telefone" v-model="data.telefone">
-
-      
-    </div>
-    <div class="campos">
-      <label for="nome">Endereço </label>
-      <input type="text" id="endereco" v-model="data.endereco">
-
-      <label for="nome">Email </label>
-      <input type="text" id="email" v-model="data.email">
+      <label for="nome">Tipo de Exercicio </label>
+      <input type="text" id="type" v-model="data.type">
     </div>
     <button @click="criar()">Criar</button>
   </div>
@@ -33,7 +21,7 @@ import {ref} from 'vue'
 import { useRoute, useRouter } from "vue-router";
 import {POST} from '../../utils/api'
 export default {
-  name: "createUser",
+  name: "criarExercicio",
 
   setup(){
     const data = ref({})
@@ -44,12 +32,12 @@ export default {
 
     const criar = async () =>{
       try {
-        const response = await POST('client',data.value)
+        const response = await POST('exercice',data.value)
 
 
         if(response){
           data.value = ""
-          router.push('/usuario')
+          router.push('/exercicios')
         }
       } catch (error) {
         console.log(error)

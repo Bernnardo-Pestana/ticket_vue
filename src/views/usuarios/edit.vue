@@ -23,28 +23,33 @@
       <label for="nome">Email </label>
       <input type="text" id="email" v-model="data.email">
     </div>
-    <button @click="criar()">Criar</button>
+    <button @click="editar()">Editar</button>
   </div>
 </template>
 
 <script>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 
 import { useRoute, useRouter } from "vue-router";
-import {POST} from '../../utils/api'
+import {PUT,GET} from '../../utils/api'
 export default {
-  name: "createUser",
+  name: "editarUser",
 
   setup(){
     const data = ref({})
     const router = useRouter()
+    const route = useRoute()
 
-    
+    onMounted(async () =>{
+        data.value = {... await GET(`client/${route.params.id}`)}
+
+        console.log(data.value)
+    })
 
 
-    const criar = async () =>{
+    const editar = async () =>{
       try {
-        const response = await POST('client',data.value)
+        const response = await PUT(`client/${route.params.id}`,data.value)
 
 
         if(response){
@@ -58,7 +63,7 @@ export default {
 
     return {
       data,
-      criar
+      editar
     }
   }
 };
