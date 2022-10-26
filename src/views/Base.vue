@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="grid overflow-x-auto bg-gray-50" >
     <router-view />
   </div>
 </template>

@@ -4,14 +4,14 @@
     <div>
       <h2>Aqui tem a Lista de treinos</h2>
       <router-link to="/treinos">
-      <button>Treinos</button>
+        <button type="button" class="bg-gray-400"> Treinos</button>
       </router-link>
     </div>
 
     <div>
       <h2>Aqui tem a Lista de Exercicios</h2>
       <router-link to="/exercicios">
-        <button >Exercicios</button>
+       <button type="button" class="bg-gray-400" >Exercicios</button>
       </router-link>
     </div>
 
@@ -20,13 +20,13 @@
 
       <h2>Veja todos os Alunos</h2>
       <router-link to="/usuario">
-        <button >Alunos</button>
+       <button type="button" class="bg-gray-400" >Alunos</button>
       </router-link>
     </div>
 
     <div>
       <h2>Aqui voce add Treino a Alunos</h2>
-      <button>Adicionar Treino a Alunos</button>
+     <button type="button" class="bg-gray-400">Adicionar Treino a Alunos</button>
     </div>
   </div>
 </template>

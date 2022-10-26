@@ -1,23 +1,25 @@
 <template>
-  <div>
     <div>
-        <router-link to="/">
-            <button> Index</button>
-        </router-link>
+         <div class="my-6">
+            <h3 class="font-bold">Lista de {{ route.name }}</h3>
+            <span class="text-sm text-gray-500"
+            >Aqui você pode observar todos os itens relacionados aos {{ route.name.toLowerCase() }} como
+            suas respectivas ações.
+            </span>
         </div>
-       <div>
-         aqui jas os Exercicios da academia, ao clicar no Botao criar, voce sera redirecionado para criar um exericio
-        <router-link to="/exercicio/criar">
-            <button >Criar Exercicio</button>
-        </router-link>
-       </div>
-       <div v-if="data.length >0" class="index">
+        <div class="flex mb-6 justify-center">
+            <router-link to="/treinos/criar">
+                <Button color="red" :text="`Criar`" />
+            </router-link>
+            </div>
+        
+        <div v-if="data.length >0" class="index">
             <table>
                 <t-head>
                     <td>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>tipo</th>
+                        <th>Serie</th>
                         <th>Ações</th>
                     </td>
                 </t-head>
@@ -25,7 +27,8 @@
                     <td>
                         <th>{{item.id}}</th>
                         <th>{{item.nome}}</th>
-                        <th>{{item.type}}</th>
+                        <th>{{item.email}}</th>
+                        <th>{{item.cpf}}</th>
                         <th>
                             <button @click="editar(item.id)">Editar</button>
                             <button @click="deletar(item.id)">Excluir</button>
@@ -36,26 +39,31 @@
             </table>
         </div>
          <div v-else class="index">
-            <h2>Não Há Exercicios nessa academia :/</h2>
+            <h2>Não Há Treinos nessa academia :/</h2>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
 import { inject, ref, onMounted, watch } from "vue";
-import {useRouter} from 'vue-router'
+import {useRouter,useRoute} from 'vue-router'
+import Button from "../../components/Button.vue";
 import {GET,DELETE} from '../../utils/api'
-
-
 export default {
-name:"index_exercicio",
+name:"index_treino",
+components:{
+Button,
+},
+
 setup(){
     
     const data = ref([])
     const router = useRouter()
+    const route = useRoute()
    
     onMounted( async ()=>{
-      data.value = await GET('/exercice')
+      data.value = await GET('/workout')
+      console.log(data.value)
     })
 
 
@@ -63,7 +71,7 @@ setup(){
         
         try {
 
-            const response = await DELETE(`/client/${item}`)
+            const response = await DELETE(`/workout/${item}`)
 
 
             data.value = data.value.filter( Element => Element.id != item);
@@ -74,17 +82,19 @@ setup(){
     }
 
      const editar  =  (item) =>{
-        console.log(item)
-        router.push(`exercicio/editar/${item}`)
+        router.push(`workout/editar/${item}`)
     }
 
 
     return{
         data,
         deletar,
-        editar
+        editar,
+        route
     }
 }
+
+
 }
 </script>
 
