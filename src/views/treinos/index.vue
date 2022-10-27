@@ -14,29 +14,24 @@
             </div>
         
         <div v-if="data.length >0" class="index">
-            <table>
-                <t-head>
-                    <td>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Serie</th>
-                        <th>Ações</th>
-                    </td>
-                </t-head>
-                <tbody v-for="(item,index) in data" :key="index">
-                    <td>
-                        <th>{{item.id}}</th>
-                        <th>{{item.nome}}</th>
-                        <th>{{item.email}}</th>
-                        <th>{{item.cpf}}</th>
-                        <th>
-                            <button @click="editar(item.id)">Editar</button>
-                            <button @click="deletar(item.id)">Excluir</button>
-                        </th>
-                    </td>
-
-                </tbody>
-            </table>
+           <table class="w-96"> 
+            <thead class="bg-white border-b">
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">ID</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nome</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Tipo </th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ação</th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr v-for="(treino) in data" v-bind:key="treino.id" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 "> 
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.id }} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.name }} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.serie }} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Editar" @click="editar(treino.id)" /> </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
          <div v-else class="index">
             <h2>Não Há Treinos nessa academia :/</h2>
@@ -82,7 +77,7 @@ setup(){
     }
 
      const editar  =  (item) =>{
-        router.push(`workout/editar/${item}`)
+        router.push(`treinos/editar/${item}`)
     }
 
 

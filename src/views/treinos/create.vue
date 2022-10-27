@@ -9,7 +9,7 @@
   </div>
 
     <div class="flex justify-center">
-        <input type="text" v-model="treino.nome" placeholder="Nome do treino"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96 mx-2">
+        <input type="text" v-model="treino.name" placeholder="Nome do treino"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96 mx-2">
         <input type="text" v-model="treino.serie" placeholder="Valor da Serie"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96">
     </div>
 
@@ -40,7 +40,7 @@
         </div>
 
         <div>
-            <h2>Lista de Exercicios Do Treino: <b> {{ treino.nome }}</b></h2>
+            <h2>Lista de Exercicios Do Treino: <b> {{ treino.name }}</b></h2>
             <table class="w-96"> 
                 <thead class="bg-white border-b">
                     <tr>
@@ -49,6 +49,7 @@
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Repetições </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Series</th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Descanço</th>
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Peso</th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Observação</th>
                     </tr>
                 </thead>
@@ -66,6 +67,9 @@
                             <input type="text" v-model="exericio_treino.descanco" placeholder="Descanso">
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> 
+                            <input type="text" v-model="exericio_treino.peso" placeholder="Peso">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> 
                             <input type="text" v-model="exericio_treino.observacao" placeholder="Observação?">
                         </td>
                     </tr>
@@ -80,7 +84,7 @@
 import { inject, ref, onMounted, watch } from "vue";
 import {useRouter,useRoute} from 'vue-router'
 import Button from "../../components/Button.vue";
-import {GET,DELETE} from '../../utils/api'
+import {GET,DELETE,POST} from '../../utils/api'
 
 export default {
   name: "treino_Cria",
@@ -108,8 +112,26 @@ export default {
 
     const criar = async ()=>{
 
-        console.log(listaTreino.value)
-        console.log(treino.value)
+        try {
+            const resp = await POST('workout',treino.value)
+
+
+            const aux = {
+                treino_id : resp,
+                lista: listaTreino.value
+            }
+
+
+            const resp2 = await POST('exercice_workout',aux)
+
+            router.push(`/treinos`)
+
+            
+        } catch (error) {
+            
+        }    
+
+    
     }
 
 
