@@ -1,42 +1,58 @@
 <template>
-  <div>
+  <div class="my-6">
     
-    <div>
-      <h2>Aqui tem a Lista de treinos</h2>
+    
+    <div class="2-column with sign-up">
+      
+      
+      <img src="../assets/treino.png" height="190" width="190" class="posicao1">
       <router-link to="/treinos">
-        <button type="button" class="bg-gray-400"> Treinos</button>
+        <Button color="red" :text="`Adicionas Treinos`" class="posicao2"/>
       </router-link>
+      
     </div>
+    
 
     <div>
-      <h2>Aqui tem a Lista de Exercicios</h2>
+      
+      <img src="../assets/exercicios.png" height="190" width="190" class="posicao3">
       <router-link to="/exercicios">
-       <button type="button" class="bg-gray-400" >Exercicios</button>
+       <Button color="red" :text="`Adicionas Exercicios`" class="posicao4"/>
       </router-link>
     </div>
 
 
     <div>
 
-      <h2>Veja todos os Alunos</h2>
+      
+      <img src="../assets/Alunos.png" height="190" width="190" class="posicao5">
       <router-link to="/usuario">
-       <button type="button" class="bg-gray-400" >Alunos</button>
+       <Button color="red" :text="`Lista Alunos`" class="posicao6"/>
       </router-link>
     </div>
 
     <div>
-      <h2>Aqui voce add Treino a Alunos</h2>
-     <button type="button" class="bg-gray-400">Adicionar Treino a Alunos</button>
+      
+      <img src="../assets/alunotre.png" height="190" width="190" class="posicao7">
+       <router-link to="/treino_usuario">
+       <Button color="red" :text="`Adicionar Treino ao Alunos`" class="posicao8"/>
+      </router-link>
     </div>
   </div>
+  
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import Button from "../components/Button.vue";
+import "./index.css";
+
 export default defineComponent({
   name: "App",
-
+components:{
+Button,
+},
   data() {
     return {
       isMobile: false,

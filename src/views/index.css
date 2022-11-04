@@ -1,0 +1,40 @@
+.posicao1{
+	position: absolute; 
+	left: 350px; /* posiciona a 90px para a esquerda */ 
+	top: 220px; /* posiciona a 70px para baixo */
+}
+.posicao2{
+	position: absolute; 
+	left: 370px; /* posiciona a 90px para a esquerda */ 
+	top: 450px; /* posiciona a 70px para baixo */
+}
+.posicao3{
+	position: absolute; 
+	left: 550px; /* posiciona a 90px para a esquerda */ 
+	top: 220px; /* posiciona a 70px para baixo */
+}
+.posicao4{
+	position: absolute; 
+	left: 560px; /* posiciona a 90px para a esquerda */ 
+	top: 450px; /* posiciona a 70px para baixo */
+}
+.posicao5{
+	position: absolute; 
+	left: 750px; /* posiciona a 90px para a esquerda */ 
+	top: 220px; /* posiciona a 70px para baixo */
+}
+.posicao6{
+	position: absolute; 
+	left: 785px; /* posiciona a 90px para a esquerda */ 
+	top: 450px; /* posiciona a 70px para baixo */
+}
+.posicao7{
+	position: absolute; 
+	left: 950px; /* posiciona a 90px para a esquerda */ 
+	top: 220px; /* posiciona a 70px para baixo */
+}
+.posicao8{
+	position: absolute; 
+	left: 940px; /* posiciona a 90px para a esquerda */ 
+	top: 450px; /* posiciona a 70px para baixo */
+}

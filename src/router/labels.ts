@@ -67,6 +67,12 @@ const List = [
     path: "/treinos/editar/:id",
     component: () => import("../views/treinos/edit.vue"),
   },
+  {
+    label: "Treino Usuario ",
+    name: "treino Usuario",
+    path: "/treino_usuario",
+    component: () => import("../views/treinos_clientes/index.vue"),
+  },
 
 ];
 export default List;

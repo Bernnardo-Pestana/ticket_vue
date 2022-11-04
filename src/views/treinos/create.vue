@@ -6,7 +6,7 @@
       >Preencha as informações abaixo e clique no botão <b>criar</b> para salvar
       as alterações.
     </span>
-  </div>
+     </div>
 
     <div class="flex justify-center">
         <input type="text" v-model="treino.name" placeholder="Nome do treino"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96 mx-2">
@@ -15,6 +15,9 @@
 
     <div class="flex justify-end mt-5">
         <Button text="Criar" :color="'blue-900'" @click="criar" />
+        <router-link to="/treinos">
+                <Button color="red" :text="`Pagina Treinos`" />
+        </router-link>
     </div>
     <div class="card shadow-sm border p-8 bg-white flex" v-if="listaExercicio">
         <div class="mx-10">
@@ -124,7 +127,7 @@ export default {
 
             const resp2 = await POST('exercice_workout',aux)
 
-            router.push(`/treinos`)
+            router.push(`/usuario`)
 
             
         } catch (error) {

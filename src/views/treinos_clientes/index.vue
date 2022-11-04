@@ -3,13 +3,10 @@
         <div class="my-6">
             <h3 class="font-bold">Lista de Alunos</h3>
             <span class="text-sm text-gray-500"
-            >Aqui jas os usuarios da academia, ao clicar no Botao criar, voce sera redirecionado para criar um usuario
+            >Aqui jas os usuarios da academia, ao clicar no Botao Adicionar do Usuario, voce sera redirecionado para Adicionar um treino ao usuario
             </span>
         </div>
        <div class="flex mb-6 justify-center">
-         <router-link to="/usuario/create">
-            <Button color="red" :text="`Criar`" />
-        </router-link>
         <router-link to="/">
                 <Button color="red" :text="`Pagina Inicial`" />
         </router-link>
@@ -32,9 +29,8 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.nome }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.email }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.cpf }} </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Editar" @click="editar(treino.id)" /> </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Excluir" @click="deletar(item.id)" /> </td>
-                    
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Adicionar" @click="editar(item.id)" /> </td>
+
                     </tr>
 
                 </tbody>
@@ -52,7 +48,7 @@ import Button from "../../components/Button.vue";
 import {useRouter} from 'vue-router'
 import {GET,DELETE} from '../../utils/api'
 export default {
-name:"index_usuario",
+name:"index_treinoUsuario",
 components:{
 Button,
 },
@@ -82,7 +78,7 @@ setup(){
         }
     }
 
-     const editar  =  (item) =>{
+    const editar  =  (item) =>{
         router.push(`usuario/editar/${item}`)
     }
 

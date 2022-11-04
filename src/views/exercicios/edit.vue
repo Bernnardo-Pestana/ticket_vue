@@ -1,17 +1,20 @@
 <template>
   <div>
-    <div>
-        <h3>Nesta pagina é onde se adiciona um aluno</h3>
+    <div class="my-6">
+      <h3 class="font-bold">Editar Exercicio  </h3>
+      <span class="text-sm text-gray-500"
+        >Preencha as informações abaixo e clique no botão <b>Salvar</b> para salvar
+        as alterações.
+      </span>
     </div>
 
-    <div class="campos">
-      <label for="nome">Nome </label>
-      <input type="text" id="nome" v-model="data.nome">
-
-      <label for="nome">Tipo de Exercicio </label>
-      <input type="text" id="type" v-model="data.type">
+    <div class="flex justify-center">
+        <input type="text" id="nome" v-model="data.nome" placeholder="Nome do Exercicio"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96 mx-2">
+        <input type="text" id="type" v-model="data.type" placeholder="Tipo de Exercicio"  class="border rounded-lg py-4 focus:outline-white form-input mt-1 pl-6 block w-96">
     </div>
-    <button @click="editar()">Editar</button>
+    <div class="flex justify-end mt-5">
+        <Button text="Salvar" :color="'blue-900'" @click="editar()" />
+    </div>
   </div>
 </template>
 
@@ -19,9 +22,13 @@
 import {ref,onMounted} from 'vue'
 
 import { useRoute, useRouter } from "vue-router";
+import Button from "../../components/Button.vue";
 import {GET, PUT} from '../../utils/api'
 export default {
   name: "editarExercicio",
+    components: {
+    Button,
+  },
 
   setup(){
     const data = ref({})

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="my-6">
-    <h3 class="font-bold">Editar um Treino existente </h3>
+    <h3 class="font-bold">Editar Treino</h3>
     <span class="text-sm text-gray-500"
       >Preencha as informações abaixo e clique no botão <b>Salvar</b> para salvar
       as alterações.
@@ -135,7 +135,7 @@ export default {
 
             const resp2 = await PUT('exercice_workout',aux)
 
-            //router.push(`/treinos`)
+            router.push(`/treinos`)
 
             
         } catch (error) {

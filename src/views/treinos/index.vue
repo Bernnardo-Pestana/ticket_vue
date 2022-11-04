@@ -11,6 +11,9 @@
             <router-link to="/treinos/criar">
                 <Button color="red" :text="`Criar`" />
             </router-link>
+            <router-link to="/">
+                <Button color="red" :text="`Pagina Inicial`" />
+            </router-link>
             </div>
         
         <div v-if="data.length >0" class="index">
