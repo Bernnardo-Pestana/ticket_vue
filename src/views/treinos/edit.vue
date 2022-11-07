@@ -15,6 +15,9 @@
 
     <div class="flex justify-end mt-5">
         <Button text="Salvar" :color="'blue-900'" @click="editar()" />
+        <router-link to="/treinos">
+                <Button color="red" :text="`Pagina Treinos`" />
+        </router-link>
     </div>
     <div class="card shadow-sm border p-8 bg-white flex" v-if="listaExercicio">
         <div class="mx-10">
@@ -51,6 +54,7 @@
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Descanço</th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Peso</th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Observação</th>
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +75,9 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> 
                             <input type="text" v-model="exericio_treino.observacao" placeholder="Observação?">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> 
+                            <Button  text="Remover" @click="removerExercicio(exericio_treino.id)"/>                       
                         </td>
                     </tr>
                 </tbody>
@@ -146,6 +153,12 @@ export default {
     }
 
 
+    const removerExercicio = async  (item) =>{
+
+        await DELETE(`exercice_workout/${item}`)
+        listaTreino.value = listaTreino.value.filter(ex => ex.id != item)
+    }
+
 
     return {
         treino,
@@ -153,6 +166,7 @@ export default {
         add,
         listaTreino,
         editar,
+        removerExercicio
     };
   },
 };

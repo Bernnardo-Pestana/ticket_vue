@@ -14,6 +14,9 @@
     </div>
     <div class="flex justify-end mt-5">
         <Button text="Salvar" :color="'blue-900'" @click="editar()" />
+        <router-link to="/exercicios">
+            <Button color="red" :text="`Pagina Exercicios`" />
+        </router-link>
     </div>
   </div>
 </template>

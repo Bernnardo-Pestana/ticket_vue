@@ -29,7 +29,9 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.id }} </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.nome }} </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.type }} </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Editar" @click="editar(item.id)" /> </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex"> <Button text="Editar" @click="editar(item.id)" /> 
+                        <Button text="Deletar" class="bg-red-500" @click="deletar(item.id)" />
+                        </td>
                     </tr>
             </tbody>
             </table>
@@ -43,7 +45,7 @@
 <script>
 import { inject, ref, onMounted, watch } from "vue";
 import {useRouter} from 'vue-router'
-import {GET,DELETE} from '../../utils/api'
+import {GET, POST,DELETE} from '../../utils/api'
 import Button from "../../components/Button.vue";
 
 export default {
@@ -62,11 +64,13 @@ setup(){
     })
 
 
-    const deletar  =   async (item) =>{
+    const deletar  =  async (item) =>{
         
         try {
-
-            const response = await DELETE(`/client/${item}`)
+            const body ={
+                id: item
+            }
+            const response = await POST(`/exercice/delete`,body)
 
 
             data.value = data.value.filter( Element => Element.id != item);

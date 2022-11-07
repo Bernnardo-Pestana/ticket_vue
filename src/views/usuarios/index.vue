@@ -32,9 +32,8 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.nome }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.email }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.cpf }} </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Editar" @click="editar(treino.id)" /> </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Excluir" @click="deletar(item.id)" /> </td>
-                    
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex"> <Button text="Editar" @click="editar(item.id)" /> 
+                     <Button text="Excluir" @click="deletar(item.id)" /> </td>
                     </tr>
 
                 </tbody>

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="card shadow-sm border p-8 bg-white">
     <div class="my-6">
     <h3 class="font-bold">Criar um novo Cliente  </h3>
     <span class="text-sm text-gray-500"
-        >Preencha as informações abaixo e clique no botão <b>criar</b> para salvar
+        >Preencha as informações abaixo e clique no botão <b>Salvar</b> para salvar
         as alterações.
       </span>
      </div>
@@ -29,7 +29,10 @@
     </div>
 
     <div class="flex justify-end mt-5">
-      <Button text="Criar" @click="criar()" />
+      <Button text="Salvar" @click="editarUsuario()" />
+      <router-link to="/usuario">
+                <Button color="red" :text="`Pagina Usuarios`" />
+        </router-link>
     </div>
 
     <hr>
@@ -39,8 +42,15 @@
         <span class="text-sm text-gray-500"
             >Selecione um treino para vincular ao Usuario.
           </span>
+          
      </div>
-      <div v-if="treinos" class="index">
+     <div class="flex justify-end my-2">
+      <router-link to="/treinos">
+      <Button text="Editar Treinos" />
+      </router-link >
+     </div>
+
+      <div v-if="treinos" class="card shadow-sm border p-8 bg-white flex justify-center">
            <table class="w-96"> 
             <thead class="bg-white border-b">
                 <tr>
@@ -58,7 +68,7 @@
             </tbody>
         </table>
         </div>
-         <div v-else class="index">
+         <div v-else class="flex justify-center">
             <h2>Não Há Treinos nessa academia :/</h2>
         </div>
     </div>
@@ -72,7 +82,7 @@ import {onMounted, ref} from 'vue'
 import Button from "../../components/Button.vue";
 
 import { useRoute, useRouter } from "vue-router";
-import {PUT,GET} from '../../utils/api'
+import {PUT,GET,POST} from '../../utils/api'
 export default {
   name: "editarUser",
   components:{
@@ -83,10 +93,12 @@ export default {
     const data = ref({})
     const router = useRouter()
     const route = useRoute()
-    const treinos = ref([])
+    const treinos = ref()
 
     onMounted(async () =>{
         data.value = {... await GET(`client/${route.params.id}`)}
+
+        console.log(data.value)
 
         const list = [... await GET('/workout')]
 
@@ -98,17 +110,19 @@ export default {
             return groups;
         }, {});
 
-  
     })
 
 
     const editar = async (item) =>{
       try {
-        const treinos_add = [... treinos.value[item]]
+        const treinos_add = {
+          user_id : data.value.id,
+          treino : [... treinos.value[item]]
+        }
 
-        console.log(treinos_add[0])
+      
 
-        //enviar a rota com id do usuario... o objeto com o id dos treinos
+        await POST(`/register-workout`,treinos_add)
         
       
       } catch (error) {
@@ -116,21 +130,24 @@ export default {
       }
     }
 
+    const editarUsuario = async ()=>{
+      try {
+        await PUT(`client/${route.params.id}`, data.value)
+      } catch (error) {
+        
+      }
+    }
+
     return {
       data,
       editar,
-      treinos
+      treinos,
+      editarUsuario
     }
   }
 };
 </script>
 
 <style>
-.campos{
-  display: flex;
-  justify-content: center;
-  align-content: space-between;
-  margin:5px;
-  margin-top:12px;
-}
+
 </style>

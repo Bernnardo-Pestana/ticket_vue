@@ -31,7 +31,9 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.id }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.name }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ treino.serie }} </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Button text="Editar" @click="editar(treino.id)" /> </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex"> <Button text="Editar" @click="editar(treino.id)" /> 
+                    <Button text="Deletar" class="bg-red-500" @click="deletar(treino.id)" />
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -72,7 +74,7 @@ setup(){
             const response = await DELETE(`/workout/${item}`)
 
 
-            data.value = data.value.filter( Element => Element.id != item);
+           // data.value = data.value.filter( Element => Element.id != item);
             
         } catch (error) {
             console.log(error)

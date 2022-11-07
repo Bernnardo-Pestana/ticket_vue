@@ -30,6 +30,9 @@
 
     <div class="flex justify-end mt-5">
       <Button text="Criar" @click="criar()" />
+      <router-link to="/usuario">
+                <Button color="red" :text="`Pagina Usuarios`" />
+        </router-link>
     </div>
     
   </div>
