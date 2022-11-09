@@ -73,6 +73,13 @@ const List = [
     path: "/treino_usuario",
     component: () => import("../views/treinos_clientes/index.vue"),
   },
+  // Cliente ver seus treinos
+  {
+    label: "Cliente",
+    name: "Cliente",
+    path: "/Cliente",
+    component: () => import("../views/cliente/show.vue"),
+  },
 
 ];
 export default List;

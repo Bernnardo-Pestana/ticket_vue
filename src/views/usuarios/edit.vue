@@ -82,7 +82,7 @@ import {onMounted, ref} from 'vue'
 import Button from "../../components/Button.vue";
 
 import { useRoute, useRouter } from "vue-router";
-import {PUT,GET,POST} from '../../utils/api'
+import {PUT,GET,POST,DELETE} from '../../utils/api'
 export default {
   name: "editarUser",
   components:{
@@ -119,12 +119,10 @@ export default {
           user_id : data.value.id,
           treino : [... treinos.value[item]]
         }
-
-      
-
-        await POST(`/register-workout`,treinos_add)
+        await DELETE(`/register-workout/${route.params.id}`);
+        await POST(`/register-workout`,treinos_add);
         
-      
+        router.push('/usuarios')
       } catch (error) {
         console.log(error)
       }

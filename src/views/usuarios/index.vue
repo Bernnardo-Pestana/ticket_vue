@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div v-if="!show">
         <div class="my-6">
             <h3 class="font-bold">Lista de Alunos</h3>
             <span class="text-sm text-gray-500"
@@ -32,8 +33,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.nome }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.email }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> {{ item.cpf }} </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex"> <Button text="Editar" @click="editar(item.id)" /> 
-                     <Button text="Excluir" @click="deletar(item.id)" /> </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex"> <Button text="Editar" @click="editar(item.id)" /> </td>
                     </tr>
 
                 </tbody>
@@ -42,54 +42,54 @@
          <div v-else class="index">
             <h2>Não Há Alunos nessa academia :/</h2>
         </div>
+
+        
+        </div>
+        <div v-else>
+            <Loader  :show="show"/>
+        </div>
     </div>
+    
 </template>
 
 <script>
 import { inject, ref, onMounted, watch } from "vue";
 import Button from "../../components/Button.vue";
+import Loader from '../../components/Loader.vue'
 import {useRouter} from 'vue-router'
 import {GET,DELETE} from '../../utils/api'
 export default {
 name:"index_usuario",
 components:{
 Button,
+Loader
 },
 
 setup(){
     
     const data = ref([])
     const router = useRouter()
+    const show = ref(false)
    
     onMounted( async ()=>{
+      show.value = true;
+
       data.value = await GET('/client')
       console.log(data.value)
+
+      show.value = false;
     })
 
 
-    const deletar  =   async (item) =>{
-        
-        try {
-
-            const response = await DELETE(`/client/${item}`)
-
-
-            data.value = data.value.filter( Element => Element.id != item);
-            
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-     const editar  =  (item) =>{
+    const editar  =  (item) =>{
         router.push(`usuario/editar/${item}`)
     }
 
 
     return{
         data,
-        deletar,
-        editar
+        editar,
+        show
     }
 }
 
