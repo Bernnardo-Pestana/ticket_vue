@@ -19,9 +19,11 @@
                 <Button color="red" :text="`Pagina Treinos`" />
         </router-link>
     </div>
+     <Button text="Salvar Exercicios" :color="'blue-900'" @click="editarExercicios()" />
     <div class="card shadow-sm border p-8 bg-white flex" v-if="listaExercicio">
         <div class="mx-10">
             <h2>Lista de Exercicios Disponiveis</h2>
+            
         <table class="w-96"> 
             <thead class="bg-white border-b">
                 <tr>
@@ -83,6 +85,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
   </div>
 </template>
@@ -102,6 +105,7 @@ export default {
   setup() {
     const treino = ref({})
     const listaExercicio = ref([])
+    const listaTreino2 = ref([])
     const listaTreino = ref([])
 
     const router = useRouter();
@@ -122,6 +126,7 @@ export default {
         console.log(item)
 
         listaTreino.value.push(listaExercicio.value[item-1])
+        listaTreino2.value.push(listaExercicio.value[item-1])
 
         
     }
@@ -133,15 +138,6 @@ export default {
             console.log("editando...", route.params.id)
             const resp = await PUT(`workout/${route.params.id}`,treino.value)
 
-
-            const aux = {
-                treino_id : resp,
-                lista: listaTreino.value
-            }
-
-
-            const resp2 = await PUT('exercice_workout',aux)
-
             router.push(`/treinos`)
 
             
@@ -150,6 +146,27 @@ export default {
         }    
 
     
+    }
+
+
+    const editarExercicios = async ()=>{
+       
+       try {
+            const aux = {
+                treino_id : route.params.id,
+                lista: listaTreino.value
+            }
+            
+
+            const resp2 = await PUT('exercice_workout',aux)
+            //await POST('exercice_workout',auxNew)
+
+            router.push(`/treinos`)
+
+            } catch (error) {
+            console.log(error)
+        }    
+
     }
 
 
@@ -166,7 +183,8 @@ export default {
         add,
         listaTreino,
         editar,
-        removerExercicio
+        removerExercicio,
+        editarExercicios
     };
   },
 };
